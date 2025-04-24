@@ -37,7 +37,7 @@ class new_user(models.Model):
     educations=models.CharField(max_length=20,default='Not specified')
     percentage=models.CharField(max_length=10,default='0')
     preferred_destination=models.CharField(max_length=20,default='Not specified')
-    start_date = models.CharField(max_length=4)
+    start_date = models.CharField(max_length=4, default='2025')
     entrance=models.CharField(max_length=5,default='N/A')
     passport=models.CharField(max_length=5,default='None')
     mode_study=models.CharField(max_length=20,default='None')
