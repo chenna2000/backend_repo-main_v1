@@ -26,15 +26,6 @@ class Job(models.Model):
     must_have_qualification = models.BooleanField(default=False)
     filter = models.BooleanField(default=False)
     source = models.CharField(max_length=50,default='LinkedIn')
-    # card_number = models.CharField(max_length=20, blank=True, null=True, default='Not Provided') # Credit/Debit card number
-    # expiration_code = models.CharField(max_length=5, blank=True, null=True, default='MM/YY') # Expiration code (MM/YY)
-    # security_code = models.CharField(max_length=4, blank=True, null=True, default='000') # Security code
-    # country = models.CharField(max_length=100, blank=True, null=True, default='India') # Country
-    # postal_code = models.CharField(max_length=10, blank=True, null=True, default='000000') # Postal code
-    # gst = models.CharField(max_length=15, blank=True, null=True, default='Not Provided') # GST number
-    # promoting_job  =  models.BooleanField(default=False)
-    # first_name = models.CharField(max_length=255, null=False, default="John")
-    # last_name = models.CharField(max_length=255, null=False, default="Doe")
 
     def __str__(self):
         return self.job_title
@@ -83,10 +74,7 @@ class Company(models.Model):
     category = models.CharField(max_length=100, default='Unknown')
     established_date = models.DateField(default=now)
     employee_size = models.IntegerField(default=0, null=True, blank=True)
-    # Attachment = models.FileField(upload_to='attachments/',default='Unknown',null=False, blank=False)
-    # is_deleted  = models.BooleanField(default=False)
-
-
+    
     def _str_(self):
         return self.name
 
@@ -108,9 +96,7 @@ class Resume(models.Model):
     state = models.CharField(max_length=100, default='Maharashtra')
     country = models.CharField(max_length=100, default='India')
     zipcode = models.CharField(max_length=6, default='522426')
-    # Attachment = models.FileField(upload_to='attachments/',null=False, blank=False)
-    # delete = models.BooleanField(default=False)
-
+   
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -248,7 +234,6 @@ class Candidate1Status_under_review(models.Model):
 
 class Student(models.Model):
     user = models.ForeignKey(new_user, on_delete=models.CASCADE)
-    # job_seeker = models.ForeignKey(JobSeeker, on_delete=models.CASCADE)
     first_name =  models.CharField(max_length=100, default='John')
     last_name = models.CharField(max_length=100, default='Doe')
     email = models.EmailField(default='example@example.com')
@@ -314,21 +299,12 @@ class Job1(models.Model):
     must_have_qualification = models.BooleanField(default=False)
     filter = models.BooleanField(default=False)
     source = models.CharField(max_length=50,default='LinkedIn')
-    # card_number = models.CharField(max_length=20, blank=True, null=True, default='Not Provided') # Credit/Debit card number
-    # expiration_code = models.CharField(max_length=5, blank=True, null=True, default='MM/YY') # Expiration code (MM/YY)
-    # security_code = models.CharField(max_length=4, blank=True, null=True, default='000') # Security code
-    # country = models.CharField(max_length=100, blank=True, null=True, default='India') # Country
-    # postal_code = models.CharField(max_length=10, blank=True, null=True, default='000000') # Postal code
-    # gst = models.CharField(max_length=15, blank=True, null=True, default='Not Provided') # GST number
-    # promoting_job  =  models.BooleanField(default=False)
-    # first_name = models.CharField(max_length=255, null=False, default="John")
-    # last_name = models.CharField(max_length=255, null=False, default="Doe")
 
     def __str__(self):
         return self.job_title
 
     class Meta:
-        db_table = 'job1'  # Custom table name for Job1
+        db_table = 'job1'
 
 class Application1(models.Model):
     university_in_charge = models.ForeignKey(UniversityInCharge, on_delete=models.CASCADE)
@@ -366,8 +342,7 @@ class College(models.Model):
     state = models.CharField(max_length=100)
     country = models.CharField(max_length=100, default='India')
     zipcode = models.CharField(max_length=6, default='522426')
-    # Attachment = models.FileField(upload_to='attachments/',default='Unknown',null=False, blank=False)
-    # is_deleted  = models.BooleanField(default=False)
+
 
 class CollegeEnquiry(models.Model):
     STATUS_CHOICES = [
@@ -375,7 +350,6 @@ class CollegeEnquiry(models.Model):
        ('not-replied', 'Not-Replied'),
     ]
     university_in_charge = models.ForeignKey(UniversityInCharge, on_delete=models.CASCADE,null=True, blank=True)
-    # college = models.ForeignKey(College, on_delete=models.CASCADE)
     new_user = models.ForeignKey(new_user, on_delete=models.CASCADE,null=True, blank=True )
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -390,7 +364,6 @@ class CollegeEnquiry(models.Model):
 
 class Visitor(models.Model):
     university_in_charge = models.ForeignKey(UniversityInCharge, on_delete=models.CASCADE)
-    # college = models.ForeignKey(College, on_delete=models.CASCADE, related_name='visitors')
     first_name = models.CharField(max_length=255, null=False, default="John")
     last_name = models.CharField(max_length=255, null=False, default="Doe")
     email = models.EmailField(null=False, default="unknown@example.com")
@@ -484,9 +457,6 @@ class JobSeeker_Resume(models.Model):
     state = models.CharField(max_length=100, default='Maharashtra')
     country = models.CharField(max_length=100, default='India')
     zipcode = models.CharField(max_length=6, default='522426')
-    # Attachment = models.FileField(upload_to='attachments/', default='Unknown' ,null=False, blank=False)
-    # delete = models.BooleanField(default=False)
-    # profile_picture = models.ImageField(upload_to='profile_pics/', default='Unknown', null=False, blank=False)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -650,7 +620,6 @@ class SavedJobForNewUser(models.Model):
 class new_user_enquiry(models.Model):
     university_in_charge = models.ForeignKey(UniversityInCharge, on_delete=models.CASCADE, null=True, blank=True)
     clg_id = models.CharField(max_length=400, default="Null", blank=True, null=True)
-    # collegeName = models.CharField(max_length=50, default='N/A')
     new_user = models.ForeignKey(new_user, on_delete=models.CASCADE,null=True, blank=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -660,7 +629,6 @@ class new_user_enquiry(models.Model):
     course = models.CharField(max_length=128, default='N/A')
     status = models.CharField(max_length=20, default='pending')
     created_at = models.DateTimeField(default=timezone.now)
-
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
