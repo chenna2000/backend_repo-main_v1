@@ -644,19 +644,6 @@ def create_user_resume(request, user_id):
                     resume.user = user_instance
                     resume.save()
 
-                    # delete_attachment = resume_form.cleaned_data.get('delete', False)
-                    # new_attachment = resume_form.cleaned_data.get('Attachment')
-
-                    # if new_attachment and resume and resume.Attachment and os.path.exists(resume.Attachment.path):
-                    #     os.remove(resume.Attachment.path)
-                    # resume.save()
-
-                    # if delete_attachment and resume.Attachment and os.path.exists(resume.Attachment.path):
-                    #     os.remove(resume.Attachment.path)
-                    #     resume.Attachment = None
-                    #     resume.save()
-                    #     return JsonResponse({'status': 'success', 'message': 'Attachment deleted successfully', 'resume_id': resume.id})
-
                 else:
                     return JsonResponse({'status': 'error', 'errors': resume_form.errors}, status=400)
 
@@ -1998,7 +1985,7 @@ def create_job_for_college(request, university_incharge_id):
 
             college_id = data.get('college')
             if not college_id:
-                return JsonResponse({'error': 'College ID is required'}, status=400)
+                return JsonResponse({'error': 'College ID is required'}, status=404)
 
             try:
                 university_in_charge = UniversityInCharge.objects.get(id=university_incharge_id)
@@ -2341,11 +2328,6 @@ def get_student_enquiries_for_college(request, university_in_charge_id):
 
     if request.method != 'GET':
         return JsonResponse({'error': 'Invalid request method'}, status=405)
-
-    # try:
-    #     college = College.objects.get(id=college_id, university_in_charge=university_in_charge)
-    # except College.DoesNotExist:
-    #     return JsonResponse({'error': 'College not found'}, status=404)
 
     try:
         enquiries = CollegeEnquiry.objects.filter(university_in_charge=university_in_charge)
@@ -5809,18 +5791,3 @@ def submit_enquiry(request, id):
         return JsonResponse({'error': 'Error while saving data. Please try again.'}, status=500)
     except Exception as e:
         return JsonResponse({'error': f'An unexpected error occurred: {str(e)}'}, status=500)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

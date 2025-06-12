@@ -50,6 +50,7 @@ class Register(View):
             country_code = data.get('country_code')
             phone_number = data.get('phonenumber')
             password = data.get('password')
+            agreed_to_terms = data.get('agreed_to_terms')
 
             if not email:
                 return JsonResponse({'error': 'Please enter a correct email id'}, status=400)
@@ -81,7 +82,7 @@ class Register(View):
                 return JsonResponse({'error': errors}, status=400)
 
             hashed_password = make_password(password)
-            send_data_to_google_sheets(first_name, last_name, email, country_code, phone_number, hashed_password, "Sheet1")
+            send_data_to_google_sheets(first_name, last_name, email, country_code, phone_number, hashed_password, agreed_to_terms, "Sheet1")
             return JsonResponse({'message': 'go to next page'})
 
         except json.JSONDecodeError:

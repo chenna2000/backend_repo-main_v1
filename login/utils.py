@@ -10,7 +10,7 @@ from datetime import datetime
 # # Path to the service account key file
 # SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, 'collegecue-910d0-firebase-adminsdk-bvx8y-971424b217.json')
 
-SERVICE_ACCOUNT_FILE = "D:\\BHARATHTECH TASKS\\collegcue-firebase-adminsdk-p63yc-498e419897.json"
+SERVICE_ACCOUNT_FILE = "D:\\BHARATHTECH TASKS\\keshav-e2362-firebase-adminsdk-fbsvc-2cd339220a.json"
 
 
 # Define the scope
@@ -21,7 +21,7 @@ credentials = Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
 # The ID of the spreadsheet to update
-SPREADSHEET_ID = '1X5ZlDRLaMs4uxLQ4VjP9bYV7IiDHIzyex_70XMzZZr0'
+SPREADSHEET_ID = '1yrMsnVOGZtTRlBlRYJQ13GGvuLjnb24TjTIkMsODpHk'
 
 def create_subadmin(username, password):
     User = get_user_model()
@@ -35,13 +35,13 @@ def create_subadmin(username, password):
 def is_superadmin(user):
     return user.is_superuser 
 
-def send_data_to_google_sheets(first_name, last_name, email, country_code, phone_number, password, sheetname):
+def send_data_to_google_sheets(first_name, last_name, email, country_code, phone_number, password, agreed_to_terms, sheetname):
     if sheetname != "Sheet1":
         return JsonResponse({'message': "Invalid sheet name"}, safe=False)
 
     formatted_date = datetime.now().strftime("%d/%m/%Y")
 
-    row_data = [first_name, last_name, email, country_code, phone_number, password, formatted_date]
+    row_data = [first_name, last_name, email, country_code, phone_number, password, agreed_to_terms, formatted_date]
 
     body = {'values': [row_data]}
     sheet_range = f"{sheetname}!A1"
